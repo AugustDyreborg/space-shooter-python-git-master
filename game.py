@@ -11,15 +11,26 @@ clock = pg.time.Clock()
 screen = pg.display.set_mode((400,600))
 pg.display.set_caption("Space Shooter")
 
-# Spaceship character
 ship_images = []
+
+class shipClass():
+    def __init__(self,shipx,shipy):
+        self.ship_x = shipx
+        self.ship_y = shipy
+        self.ship_w = ship_images[0].get_rect().size[0]
+        self.ship_h = ship_images[0].get_rect().size[1]
+
+
+
+# Spaceship character
+Ships = []
 for i in range(3):
     img = pg.image.load(f"images/ship_{i}.png")
     ship_images.append(img)
-ship_x = 200 
-ship_y = 500
-ship_w = ship_images[0].get_rect().size[0]
-ship_h = ship_images[0].get_rect().size[1]
+    Ships.append(shipClass(200, 500))
+
+theShip = (200, 500)
+
 
 # Alien character
 alien_images = []
@@ -103,10 +114,10 @@ while running:
 
     # Spaceship
     if left_pressed:
-        ship_x -= 8
+        theShip.ship_x -= 8
 
     if right_pressed:
-        ship_x += 8
+        theShip.ship_x += 8
 
     # Projectile movement
     # Reverse iteration needed to handle each projectile correctly
